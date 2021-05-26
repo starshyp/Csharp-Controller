@@ -5,19 +5,24 @@ namespace RocketElevatorsCsharpController
 {
     public class CallButton
     {
-        //defined properties
-        public int ID { get; set; }
-        public string status { get; set; }
-        public int floor { get; set; }
-        public string direction { get; set; }
+        //auto-properties
+        public char ID { get; set; }
+        public string Status { get; set; }
+        public int Floor { get; set; }
+        public string Direction { get; set; }
 
         //constructor
         public CallButton(int _id, int _floor, string _direction)
         {
             this.ID = _id;
-            this.status = "online";
-            this.floor = _floor;
-            this.direction = _direction;
+            this.Status = "off";
+            this.Floor = _floor;
+            this.Direction = _direction;
+        }
+
+        public static implicit operator List<object>(CallButton v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
