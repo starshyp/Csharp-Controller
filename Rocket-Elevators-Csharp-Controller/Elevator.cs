@@ -6,116 +6,116 @@ namespace RocketElevatorsCsharpController
     public class Elevator
     {
         //auto-properties
-        public char ID { get; set; }
+        public int ID { get; set; }
         public string Status { get; set; }
         public int CurrentFloor { get; set; }
         public string Direction { get; set; }
         public string Door { get; set; }
-        public Array FloorRequestsList { get; set; }
-        public Array CompletedRequestsList { get; set; }
+        public List<int> FloorRequestsList { get; set; }
+        public List<int> CompletedRequestsList { get; set; }
 
         //constructor
-        public Elevator(char _id)
+        public Elevator(int _id)
         {
             this.ID = _id;
             this.Status = "idle";
             this.CurrentFloor = 1;
             this.Direction = null;
             this.Door = new Door(_id);
-            this.FloorRequestsList = new int[] {};
-            this.CompletedRequestsList = new int[] {};
+            this.FloorRequestsList = new List<int> { };
+            this.CompletedRequestsList = new List<int> {};
         }
 
-        public static void createFloorRequestButtons(int _amountOfFloors)
+        public static void CreateFloorRequestButtons(int _amountOfFloors)
         {
-            let buttonFloor = 1
-        for (let i = 0; i < _amountOfFloors; i++)
-            {
-                int floorRequestButton = new FloorRequestButton(floorRequestButtonID, buttonFloor) //id, floor
-            this.floorRequestButtonsList.push(floorRequestButton)
-            buttonFloor++
-            floorRequestButtonID++
-        }
-        }
-
-        requestFloor(floor)
-        {
-            this.floorRequestList.Add(floor)
-            this.sortFloorList()
-            this.move()
-            this.operateDoors()
-        }
-
-        Go()
-        {
-            while (this.floorRequestList.length != 0)
-            {
-                let destination = this.floorRequestList[0]
-                this.status = 'moving'
-                if (this.currentFloor < destination)
+            int buttonFloor = 1;
+            for (int i = 0; i < _amountOfFloors; i++)
                 {
-                    this.direction = 'up'
-                while (this.currentFloor < destination)
+                    FloorRequestButton floorRequestButton = new FloorRequestButton(FloorRequestButtonID, buttonFloor, direction); //id, floor
+                    this.floorRequestButtonsList.push(floorRequestButton);
+                    buttonFloor++;
+                    FloorRequestButtonID++;
+                }
+        }
+
+        public void RequestFloor(int floor)
+        {
+            this.FloorRequestsList.Add(floor);
+            //this.SortFloorList();
+            this.Go();
+            //this.SwingDoors();
+        }
+
+        public void Go()
+        {
+            while (this.FloorRequestsList.Length != 0)
+            {
+                int destination = this.FloorRequestsList[0];
+                this.Status = "moving";
+                if (this.CurrentFloor < destination)
+                {
+                    this.Direction = "up";
+                while (this.CurrentFloor < destination)
                     {
-                        console.log("Elevator #" + this.ID + " is now at floor " + this.currentFloor)
-                    this.currentFloor++
+                        Console.WriteLine("Elevator #" + this.ID + " is now at floor " + this.CurrentFloor);
+                        this.CurrentFloor++;
+                    }
                 }
-                }
-                else if (this.currentFloor > destination)
+                else if (this.CurrentFloor > destination)
                 {
-                    this.direction = 'down'
-                  while (this.currentFloor > destination)
+                    this.Direction = "down";
+                  while (this.CurrentFloor > destination)
                     {
-                        this.currentFloor--
+                        this.CurrentFloor--;
                 }
                 }
-                this.status = 'stopped'
-                this.floorRequestList.shift()
+                this.Status = "stopped";
+                this.FloorRequestsList.Next();
             }
-            this.status = 'idle'
+            this.Status = "idle";
         }
 
-        sortFloorList()
-        {
-            if (this.direction == 'up')
-            {
-                this.floorRequestList.sort(function(a, b){ return a - b});
-            }
-            else
-            {
-                this.floorRequestList.sort(function(a, b){ return b - a});
+        //public void SortFloorList()
+        //{
+        //    if (this.Direction == "up")
+        //    {
+        //        this.FloorRequestsList.Sort(var(a, b) { return a - b});
+        //    }
+        //    else
+        //    {
+        //        this.FloorRequestsList.Sort(var(a, b) { return b - a});
 
-            }
-        }
+        //    }
+        //}
 
-        operateDoors()
-        {
-            this.doorStatus = 'opened'
-            // WAIT 5 seconds
-        if (!this.overweight)
-            {
-                this.door.status = 'closing'
-            if (!this.door.obstruction)
-                {
-                    this.door.status = 'closed'
-            }
-                else
-                {
-                    //Wait for the person to clear the way
-                    this.door.obstruction = false
-                  this.operateDoors()
-              }
-            }
-            else
-            {
-                while (this.overweight)
-                {
-                    // Activate overweight alarm, and wait for someone to get out
-                    this.overweight = false
-                }
-                this.operateDoors()
-          }
-        }
+        //public void SwingDoors()
+        //{
+        //    this.doorStatus = "opened";
+        //    // WAIT 5 seconds
+        //if (!this.overweight)
+        //    {
+        //        this.door.status = "closing";
+        //    if (!this.door.obstruction)
+        //        {
+        //            this.door.status = "closed";
+        //    }
+        //        else
+        //        {
+        //            //Wait for the person to clear the way
+        //            this.door.obstruction = false
+        //          this.operateDoors()
+        //      }
+        //    }
+        //    else
+        //    {
+        //        while (this.overweight)
+        //        {
+        //            // Activate overweight alarm, and wait for someone to get out
+        //            this.overweight = false
+        //        }
+        //        this.operateDoors()
+        //  }
+        //}
 
         public static implicit operator List<object>(Elevator v)
         {

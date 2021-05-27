@@ -6,7 +6,7 @@ namespace RocketElevatorsCsharpController
     public class CallButton
     {
         //auto-properties
-        public char ID { get; set; }
+        public int ID { get; set; }
         public string Status { get; set; }
         public int Floor { get; set; }
         public string Direction { get; set; }

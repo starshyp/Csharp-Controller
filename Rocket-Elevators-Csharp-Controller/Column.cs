@@ -11,50 +11,126 @@ namespace RocketElevatorsCsharpController
         //auto-properties
         public int ID { get; set; }
         public string Status { get; set; }
-        public int[] ServedFloors { get; set; }
+        public List<int> ServedFloors;
         public bool IsBasement { get; set; }
-        
-        public string _direction { get; private set; }
-        public int _floor { get; private set; }
+        public List<Elevator> ElevatorsList;
+        public List<CallButton> CallButtonsList;
 
-        public List<Elevator> ElevatorsList = new List<Elevator>();
-        public List<CallButton> CallButtonsList = new List<CallButton>();
+        //public string _direction { get; private set; }
+        //public int _floor { get; private set; }
 
-        //constructor
+        //constructors
+        public Column()
+        {
+
+        }
         public Column(int _id, int _amountOfElevators, int _servedFloors, bool _isBasement)
         {
             this.ID = _id;
             this.Status = "online";
-            this.ServedFloors = new int[] {};
+            this.ServedFloors = new List<int>();
             this.IsBasement = false;
-            this.ElevatorsList = new Elevator(_id);
-            this.CallButtonsList = new CallButton(_id, _floor, _direction);
-
-            //dow we need this?
-            this.CreateElevators(_amountOfFloors, _amountOfElevators);
-            this.CreateCallButtons(_amountOfFloors);
+            this.ElevatorsList = new List<Elevator>();
+            //int _floor = 0;
+            //string _direction = null;
+            this.CallButtonsList = new List<CallButton>();
         }
 
         //method to add to ServedFloors
         //The floors are separated amongst the columns in the following way: B6 to B1, 2 to 20, 21 to 40, 41 to 60.
         //private List<int> ServedFloors = new List<int>();
-        static void ServedFloors()
+        static void PushServedFloors(int _amountOfColumns)
         {
-
-        }
-        int first = firstColumn.Range(01, 06)
-        int secondColumn.Range(2, 20);
-        int thirdColumn.Range(21, 40);
-        int fourthColumn.Range(41, 60);
-
-            for (int i = 0; i<columns; i++, ID++)
+            for (var item = 0; item < _amountOfColumns; item++)
             {
-                column.ID = ID;
-                ColumnsList.Add(column);
+                if (this.ID == 0)
+                {
+                    for (int i = 0; i > -6; i--)
+                    {
+                        this.PushServedFloors.Add(i);
+                        Console.WriteLine(i);
+                    }
+                }
+                else if (this.ID == 1)
+                {
+                    for (int i = 0; i < 21; i++)
+                    {
+                        this.PushServedFloors.Add(i);
+                    }
+                }
+                else if (this.ID == 2)
+                {
+                    this.PushServedFloors.Add(1);
+                    for (int i = 21; i < 41; i++)
+                    {
+                        this.PushServedFloors.Add(i);
+                    }
+                }
+                else if (this.ID == 3)
+                {
+                    this.PushServedFloors.Add(1);
+                    for (int i = 41; i < 61; i++)
+                    {
+                        this.PushServedFloors.Add(i);
+                    }
+                }
+                foreach (var i in PushServedFloors)
+                {
+                    Console.WriteLine(i);
+                }
             }
+            //int floor;
+            //string column;
+
+            //floor = 1;
+            //switch (floor)
+            //{
+            //    case 01:
+            //    case 02:
+            //    case 03:
+            //    case 04:
+            //    case 05:
+            //    case 06:
+            //        column = colb;
+            //        break;
+
+            //    case > 1:
+            //    case <= 20:
+            //        column = col1;
+            //        break;
+
+            //    case 21:
+            //    case <= 40:
+            //        column = col2;
+            //        break;
+
+            //    case 41:
+            //    case <= 60:
+            //        column = col3;
+            //        break;
+
+            //    default:
+            //        column = lob;
+            //        break;
+
+            //List<int> numbers = new List<int>();
+            //public int 
+            //int[] array = new int[] { 1, 2, 3 };
+            //numbers.AddRange(array);
+        }
+        //int first = firstColumn.Range(01, 06)
+        //int secondColumn.Range(2, 20);
+        //int thirdColumn.Range(21, 40);
+        //int fourthColumn.Range(41, 60);
+
+        //    for (int i = 0; i<columns; i++, ID++)
+        //    {
+        //        column.ID = ID;
+        //        ColumnsList.Add(column);
+        //    }
 
         //method to add to CallButtonsList
-        public static void CreateCallButtons(int _amountOfFloors)
+        public void CreateCallButtons(int _amountOfFloors)
         {
             int buttonFloor = 1;
 
@@ -62,14 +138,14 @@ namespace RocketElevatorsCsharpController
                 {
                     if (buttonFloor < _amountOfFloors)
                     { //If it's not the last floor
-                    int callButton = new CallButton(callButtonID, buttonFloor, "up") //id, floor, direction
+                    CallButton callButton = new CallButton(callButtonID, buttonFloor, "up"); //id, floor, direction
                     this.CallButtonsList.Add(callButton);
                         callButtonID++;
                     }
 
                     if (buttonFloor > 1)
                     { //If it's not the first floor
-                    int callButton = new CallButton(callButtonID, buttonFloor, "down") //id, floor, direction
+                    CallButton callButton = new CallButton(callButtonID, buttonFloor, "down"); //id, floor, direction
                     this.CallButtonsList.Add(callButton);
                         callButtonID++;
                     }
@@ -78,36 +154,36 @@ namespace RocketElevatorsCsharpController
         }
 
         //method to add to ElevatorsList
-        public static void CreateElevators(_amountOfFloors, _amountOfElevators)
+        public void CreateElevators(int _amountOfFloors, int _amountOfElevators)
         {
             for (int i = 0; i < _amountOfElevators; i++)
             {
-            char elevator = new Elevator(elevatorID, _amountOfFloors) //id, amountOfFloors
-            this.ElevatorsList.Add(elevator);
+                Elevator elevator = new Elevator(elevatorID, _amountOfFloors); //id, amountOfFloors
+                this.ElevatorsList.Add(elevator);
                 elevatorID++;
             }
         }
 
         //method to request elevator
         //****************MAIN****************
-        public Elevator requestElevator(int _requestedFloor, string _direction)
+        public Elevator RequestElevator(int _requestedFloor, string _direction)
         {
             //Elevator elevator = new Elevator(_id);
             string elevator = this.FindBestElevator(_floor, _direction);
             elevator.FloorRequestsList.Add(_floor);
             //elevator.sortFloorList();
             elevator.Go();
-            elevator.SwingDoors();
+            //elevator.SwingDoors();
             return elevator;
         }
         //****************MAIN****************
 
         //method to find best elevator
-        public char FindBestElevator(int _requestedFloor, string _direction)
+        public FindBestElevator(int _requestedFloor, string _direction)
         {
             if (_requestedFloor == 1)
             {
-                foreach (char elevator in ElevatorsList)
+                foreach (int elevator in ElevatorsList)
                 {
                     Elevator elevator = new Elevator(ID);
                     Elevator.ID = ID;
