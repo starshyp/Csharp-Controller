@@ -43,7 +43,7 @@ namespace RocketElevatorsCsharpController
         //method to add to ServedFloors
         //The floors are separated amongst the columns in the following way: B6 to B1, 2 to 20, 21 to 40, 41 to 60.
         //private List<int> ServedFloors = new List<int>();
-        static void PushServedFloors(int _amountOfColumns, int _requestedFloor)
+        static void PushServedFloors(int _amountOfColumns)
         {
             for (var item = 0; item < _amountOfColumns; item++)
             {
