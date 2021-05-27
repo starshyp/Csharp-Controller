@@ -6,18 +6,17 @@ namespace RocketElevatorsCsharpController
     public class Column
     {
         //fields
-
+        //private int GlobalMinFloor;
+        //private int GlobalMaxFloor;
 
         //auto-properties
         public int ID { get; set; }
         public string Status { get; set; }
         public List<int> ServedFloors;
+        //public List<int> ServedFloors { get; set; }
         public bool IsBasement { get; set; }
         public List<Elevator> ElevatorsList;
         public List<CallButton> CallButtonsList;
-
-        //public string _direction { get; private set; }
-        //public int _floor { get; private set; }
 
         //constructors
         public Column()
@@ -29,17 +28,22 @@ namespace RocketElevatorsCsharpController
             this.ID = _id;
             this.Status = "online";
             this.ServedFloors = new List<int>();
+            //this.ServedFloors = _servedFloors;
             this.IsBasement = false;
             this.ElevatorsList = new List<Elevator>();
-            //int _floor = 0;
-            //string _direction = null;
             this.CallButtonsList = new List<CallButton>();
         }
+
+        //public Column(int minFloor, int maxFloor)
+        //{
+        //    GlobalMinFloor = minFloor;
+        //    GlobalMaxFloor = maxFloor;
+        //}
 
         //method to add to ServedFloors
         //The floors are separated amongst the columns in the following way: B6 to B1, 2 to 20, 21 to 40, 41 to 60.
         //private List<int> ServedFloors = new List<int>();
-        static void PushServedFloors(int _amountOfColumns)
+        static void PushServedFloors(int _amountOfColumns, int _requestedFloor)
         {
             for (var item = 0; item < _amountOfColumns; item++)
             {
@@ -47,7 +51,7 @@ namespace RocketElevatorsCsharpController
                 {
                     for (int i = 0; i > -6; i--)
                     {
-                        this.PushServedFloors.Add(i);
+                        this.ServedFloors.Add(i);
                         Console.WriteLine(i);
                     }
                 }
@@ -55,26 +59,26 @@ namespace RocketElevatorsCsharpController
                 {
                     for (int i = 0; i < 21; i++)
                     {
-                        this.PushServedFloors.Add(i);
+                        this.ServedFloors.Add(i);
                     }
                 }
                 else if (this.ID == 2)
                 {
-                    this.PushServedFloors.Add(1);
+                    this.ServedFloors.Add(1);
                     for (int i = 21; i < 41; i++)
                     {
-                        this.PushServedFloors.Add(i);
+                        this.ServedFloors.Add(i);
                     }
                 }
                 else if (this.ID == 3)
                 {
-                    this.PushServedFloors.Add(1);
+                    this.ServedFloors.Add(1);
                     for (int i = 41; i < 61; i++)
                     {
-                        this.PushServedFloors.Add(i);
+                        this.ServedFloors.Add(i);
                     }
                 }
-                foreach (var i in PushServedFloors)
+                foreach (var i in ServedFloors)
                 {
                     Console.WriteLine(i);
                 }
@@ -183,20 +187,20 @@ namespace RocketElevatorsCsharpController
         {
             if (_requestedFloor == 1)
             {
-                foreach (int elevator in ElevatorsList)
+                ElevatorsList.ForEach(elevator =>
                 {
-                    Elevator elevator = new Elevator(ID);
+                    Elevator elevator1 = new Elevator(ID);
                     Elevator.ID = ID;
                     ElevatorsList.Add(elevator);
-                        if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
-                        {
-                            
-                        }
-                        if (elevator.CurrentFloor == 1 && elevator.Status == "idle")
-                        {
+                    if (elevator1.CurrentFloor == 1 && elevator1.Status == "stopped")
+                    {
 
-                        }
-                }
+                    }
+                    if (elevator1.CurrentFloor == 1 && elevator1.Status == "idle")
+                    {
+
+                    }
+                });
                 if (_requestedFloor != 1)
                 {
 

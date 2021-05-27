@@ -19,7 +19,7 @@ namespace RocketElevatorsCsharpController
             this.Status = "online";
             this.ColumnsList = new List<Column>();
                 int ID = 0;
-                for (int i = -6; i <= _amountOfColumns; ID++)
+                for (int i = 0; i <= _amountOfColumns; ID++)
                 {
                     Column column = new Column(ID, 5, 20, false);
                     column.ID = ID;
@@ -97,13 +97,13 @@ namespace RocketElevatorsCsharpController
             {
                 //Column column = new Column();
                 //Elevator elevator = new Elevator(_id);
-                int chosenColumn = this.FindBestColumn(_requestedFloor);
-                return chosenColumn;
+                int bestColumn = this.FindBestColumn(_requestedFloor);
+                return bestColumn;
                 int chosenElevator = Column.FindBestElevator(_requestedFloor, _direction);
                 return chosenElevator;
                 
                 Elevator elevator = new Elevator();
-                object elevator.Go();
+                elevator.Go();
 
                 //if (currentFloor == 1 && _requestedFloor == firstColumn)
                 //{
@@ -137,20 +137,39 @@ namespace RocketElevatorsCsharpController
         //}
 
         //method to find best column
-        public int FindBestColumn(int _requestedFloor)
-            {
+        public void FindBestColumn(int _requestedFloor)
+        {
+            Column column = new Column();
+            ColumnsList.ForEach(chosenColumn => {
+                if (column.ServedFloors[0]) == _requestedFloor)
+                {
+                    return chosenColumn;
+                }
+            //});
+
+
+            //public void FindBestColumn(int_requestedFloor)
+            //    {
+            //        Column column = new Column(minFloor, maxFloor);
+            //        ColumnsList.ForEach(chosenColumn => {
+            //        if (_requestedFloor >= column.GlobalMinFloor && _requestedFloor <= column.GlobalMaxFloor)
+            //        {
+            //            return chosenColumn;
+            //        }
+            //    });
+
             //List<Column> column = new List<Column>();
             //Column column = new Column(_id, _amountOfElevators, _servedFloors, _isBasement);
-                foreach (int column in this.ColumnsList)
-                {
-                    if (_servedFloors == _requestedFloor)
-                    {
-                        //int column = value;
-                        //Column column = new Column();
-                        return column;
-                    }
-                }
-            }
+            //    ForEach (int column in this.ColumnsList)
+            //{
+            //    if (_servedFloors == _requestedFloor)
+            //    {
+            //        //int column = value;
+            //        //Column column = new Column();
+            //        return column;
+            //    }
+            //}
+        }
     }
 }
 
