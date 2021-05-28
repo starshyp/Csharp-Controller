@@ -16,13 +16,23 @@ namespace RocketElevatorsCsharpController
         //public List<int> ServedFloors { get; set; }
         public bool IsBasement { get; set; }
         public List<Elevator> ElevatorsList;
+            //for (let i = 0; i<_amountOfElevators; i++) {
+            //let elevator = new Elevator(i, _amountOfElevators)
+            //this.elevatorsList.push(elevator)
+            //}
         public List<CallButton> CallButtonsList;
+            //for (int j = 0; j <= _amountOfFloors; j++) {
+            //    FloorRequestButton floorButton = j;
+            //        if (j != 1) {
+            //        let button = new CallButton(j, j, 'down');
+            //        this.callButtonsList.push(button)
+            //        } else if (j != _amountOfFloors) {
+            //        let button = new CallButton(j, j, 'up');
+            //        this.callButtonsList.push(button)
+            //        }
+            //}
 
         //constructors
-        public Column()
-        {
-
-        }
         public Column(int _id, int _amountOfElevators, int _servedFloors, bool _isBasement)
         {
             this.ID = _id;
@@ -137,7 +147,7 @@ namespace RocketElevatorsCsharpController
         public void CreateCallButtons(int _amountOfFloors)
         {
             int buttonFloor = 1;
-
+            int callButtonID = 0;
             for (int i = 0; i < _amountOfFloors; i++)
                 {
                     if (buttonFloor < _amountOfFloors)
@@ -173,7 +183,7 @@ namespace RocketElevatorsCsharpController
         public Elevator RequestElevator(int _requestedFloor, string _direction)
         {
             //Elevator elevator = new Elevator(_id);
-            string elevator = this.FindBestElevator(_floor, _direction);
+            Elevator elevator = this.FindBestElevator(_floor, _direction);
             elevator.FloorRequestsList.Add(_floor);
             //elevator.sortFloorList();
             elevator.Go();
@@ -183,29 +193,31 @@ namespace RocketElevatorsCsharpController
         //****************MAIN****************
 
         //method to find best elevator
-        public FindBestElevator(int _requestedFloor, string _direction)
+        private Elevator FindBestElevator(int _requestedFloor, string _direction)
         {
+            Elevator chosenElevator = null;
             if (_requestedFloor == 1)
             {
                 ElevatorsList.ForEach(elevator =>
                 {
-                    Elevator elevator1 = new Elevator(ID);
-                    Elevator.ID = ID;
-                    ElevatorsList.Add(elevator);
-                    if (elevator1.CurrentFloor == 1 && elevator1.Status == "stopped")
+                    //Elevator elevator1 = new Elevator(ID);
+                    //Elevator.ID = ID;
+                    //ElevatorsList.Add(elevator);
+                    if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
                     {
-
+                        chosenElevator = elevator;
                     }
-                    if (elevator1.CurrentFloor == 1 && elevator1.Status == "idle")
+                    if (elevator.CurrentFloor == 1 && elevator.Status == "idle")
                     {
-
+                        chosenElevator = elevator;
+                    }
+                    else if (_requestedFloor != 1)
+                    {
+                        chosenElevator = elevator;
                     }
                 });
-                if (_requestedFloor != 1)
-                {
-
-                }
             }
+            return chosenElevator;
         }
 
         //method to score elevator

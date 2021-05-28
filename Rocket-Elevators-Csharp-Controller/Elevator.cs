@@ -26,15 +26,16 @@ namespace RocketElevatorsCsharpController
             this.CompletedRequestsList = new List<int> {};
         }
 
-        public static void CreateFloorRequestButtons(int _amountOfFloors)
+        private void CreateFloorRequestButtons(int _amountOfFloors)
         {
             int buttonFloor = 1;
+            string direction = null;
             for (int i = 0; i < _amountOfFloors; i++)
                 {
-                    FloorRequestButton floorRequestButton = new FloorRequestButton(FloorRequestButtonID, buttonFloor, direction); //id, floor
-                    this.floorRequestButtonsList.push(floorRequestButton);
+                    FloorRequestButton floorRequestButton = new FloorRequestButton(ID, buttonFloor, direction); //id, floor
+                    this.FloorRequestsList.Add(i);
                     buttonFloor++;
-                    FloorRequestButtonID++;
+                    ID++;
                 }
         }
 

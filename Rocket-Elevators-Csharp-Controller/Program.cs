@@ -6,7 +6,9 @@ namespace RocketElevatorsCsharpController
     {
         public static void Main(string[] args)
         {
-            //Battery battery = new Battery();
+            //Battery battery = new Battery(1,1,1,1,1);
+            //battery.FindBestColumn(5);
+
             //Column column1 = new Column(...);
 
             //Elevator elevator = new Elevator();
