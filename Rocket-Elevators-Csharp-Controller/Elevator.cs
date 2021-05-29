@@ -26,6 +26,11 @@ namespace RocketElevatorsCsharpController
             this.CompletedRequestsList = new List<int> {};
         }
 
+        public Elevator(int _id, int _amountOfElevators)
+        {
+
+        }
+
         private void CreateFloorRequestButtons(int _amountOfFloors)
         {
             int buttonFloor = 1;
@@ -49,7 +54,7 @@ namespace RocketElevatorsCsharpController
 
         public void Go()
         {
-            while (this.FloorRequestsList.Length != 0)
+            while (this.FloorRequestsList.Count != 0)
             {
                 int destination = this.FloorRequestsList[0];
                 this.Status = "moving";
@@ -71,7 +76,7 @@ namespace RocketElevatorsCsharpController
                 }
                 }
                 this.Status = "stopped";
-                this.FloorRequestsList.Next();
+                //this.FloorRequestsList.Next();
             }
             this.Status = "idle";
         }

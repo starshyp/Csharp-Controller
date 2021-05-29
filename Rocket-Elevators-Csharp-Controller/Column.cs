@@ -16,21 +16,8 @@ namespace RocketElevatorsCsharpController
         //public List<int> ServedFloors { get; set; }
         public bool IsBasement { get; set; }
         public List<Elevator> ElevatorsList;
-            //for (let i = 0; i<_amountOfElevators; i++) {
-            //let elevator = new Elevator(i, _amountOfElevators)
-            //this.elevatorsList.push(elevator)
-            //}
         public List<CallButton> CallButtonsList;
-            //for (int j = 0; j <= _amountOfFloors; j++) {
-            //    FloorRequestButton floorButton = j;
-            //        if (j != 1) {
-            //        let button = new CallButton(j, j, 'down');
-            //        this.callButtonsList.push(button)
-            //        } else if (j != _amountOfFloors) {
-            //        let button = new CallButton(j, j, 'up');
-            //        this.callButtonsList.push(button)
-            //        }
-            //}
+
 
         //constructors
         public Column(int _id, int _amountOfElevators, int _servedFloors, bool _isBasement)
@@ -41,7 +28,27 @@ namespace RocketElevatorsCsharpController
             //this.ServedFloors = _servedFloors;
             this.IsBasement = false;
             this.ElevatorsList = new List<Elevator>();
+            for (int i = 0; i < _amountOfElevators; i++)
+            {
+                Elevator elevator = new Elevator(i, _amountOfElevators);
+                this.ElevatorsList.Add(elevator);
+            }
+
             this.CallButtonsList = new List<CallButton>();
+            for (int j = 0; j <= _servedFloors; j++)
+            {
+                //FloorRequestButton floorButton = j;
+                if (j != 1)
+                {
+                    CallButton button = new CallButton(j, j, "down");
+                    this.CallButtonsList.Add(button);
+                    }
+                else if (j != _servedFloors)
+                {
+                    CallButton button = new CallButton(j, j, "up");
+                    this.CallButtonsList.Add(button);
+                    }
+            }
         }
 
         //public Column(int minFloor, int maxFloor)
@@ -53,7 +60,7 @@ namespace RocketElevatorsCsharpController
         //method to add to ServedFloors
         //The floors are separated amongst the columns in the following way: B6 to B1, 2 to 20, 21 to 40, 41 to 60.
         //private List<int> ServedFloors = new List<int>();
-        static void PushServedFloors(int _amountOfColumns)
+        private void PushServedFloors(int _amountOfColumns)
         {
             for (var item = 0; item < _amountOfColumns; item++)
             {
@@ -67,7 +74,7 @@ namespace RocketElevatorsCsharpController
                 }
                 else if (this.ID == 1)
                 {
-                    for (int i = 0; i < 21; i++)
+                    for (int i = 2; i < 21; i++)
                     {
                         this.ServedFloors.Add(i);
                     }
@@ -169,7 +176,7 @@ namespace RocketElevatorsCsharpController
 
         //method to add to ElevatorsList
         public void CreateElevators(int _amountOfFloors, int _amountOfElevators)
-        {
+        {   
             for (int i = 0; i < _amountOfElevators; i++)
             {
                 Elevator elevator = new Elevator(elevatorID, _amountOfFloors); //id, amountOfFloors
@@ -183,13 +190,20 @@ namespace RocketElevatorsCsharpController
         public Elevator RequestElevator(int _requestedFloor, string _direction)
         {
             //Elevator elevator = new Elevator(_id);
-            Elevator elevator = this.FindBestElevator(_floor, _direction);
-            elevator.FloorRequestsList.Add(_floor);
+            Elevator elevator = this.FindBestElevator(_requestedFloor);
+            elevator.FloorRequestsList.Add(_requestedFloor);
             //elevator.sortFloorList();
             elevator.Go();
+            Console.WriteLine("<OPENING DOORS>");
             //elevator.SwingDoors();
             return elevator;
         }
+
+        private Elevator FindBestElevator(int requestedFloor)
+        {
+            throw new NotImplementedException();
+        }
+
         //****************MAIN****************
 
         //method to find best elevator

@@ -47,6 +47,11 @@ namespace RocketElevatorsCsharpController
                 elevator.Go();
             }
 
+        private Column FindBestElevator(int requestedFloor, string direction)
+        {
+            throw new NotImplementedException();
+        }
+
         //method to find best column
         private Column FindBestColumn(int _requestedFloor)
             {
