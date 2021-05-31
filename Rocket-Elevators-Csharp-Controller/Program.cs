@@ -15,7 +15,34 @@ namespace RocketElevatorsCsharpController
             //CallButton callButton = new CallButton();
             //FloorRequestButton floorRequestButton = new FloorRequestButton();
             //Door door = new Door();
-            Console.WriteLine("Hello World!");
+
+            //Console.WriteLine("Hello World!");
+
+            //Column column = new Column(0, 5, { 1,2,3,4,5}, true);
+            //Console.WriteLine(column.ID);
+            //Console.WriteLine(column.amountOfElevators);
+            //Console.WriteLine(column.servedFloors);
+            //Console.WriteLine(column.isBasement);
+
+            Battery battery = new Battery(4, 60, 6, 5, 5);
+            battery.ColumnsList[3].ElevatorsList[0].CurrentFloor = 58;
+            battery.ColumnsList[3].ElevatorsList[0].Direction = "down";
+
+            battery.ColumnsList[3].ElevatorsList[1].CurrentFloor = 50;
+            battery.ColumnsList[3].ElevatorsList[1].Direction = "up";
+
+            battery.ColumnsList[3].ElevatorsList[2].CurrentFloor = 46;
+            battery.ColumnsList[3].ElevatorsList[2].Direction = "up";
+
+            battery.ColumnsList[3].ElevatorsList[3].CurrentFloor = 1;
+            battery.ColumnsList[3].ElevatorsList[3].Direction = "up";
+
+            battery.ColumnsList[3].ElevatorsList[4].CurrentFloor = 60;
+            battery.ColumnsList[3].ElevatorsList[4].Direction = "down";
+
+            //int _id, int _amountOfElevators, int _servedFloors, bool _isBasement)
+            Column column = new Column(4, 5, 4, false);
+            column.RequestElevator(54, "down");
 
             //SCENARIO **TO-DO**
             //Column column = new Column("B", 2, 2);

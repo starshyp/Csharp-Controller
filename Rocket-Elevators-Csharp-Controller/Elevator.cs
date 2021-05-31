@@ -14,7 +14,6 @@ namespace RocketElevatorsCsharpController
         public List<int> FloorRequestsList { get; set; }
         public List<int> CompletedRequestsList { get; set; }
 
-        //constructor
         public Elevator(int _id)
         {
             this.ID = _id;
@@ -26,22 +25,17 @@ namespace RocketElevatorsCsharpController
             this.CompletedRequestsList = new List<int> {};
         }
 
-        public Elevator(int _id, int _amountOfElevators)
-        {
-
-        }
-
         private void CreateFloorRequestButtons(int _amountOfFloors)
         {
             int buttonFloor = 1;
             string direction = null;
             for (int i = 0; i < _amountOfFloors; i++)
-                {
-                    FloorRequestButton floorRequestButton = new FloorRequestButton(ID, buttonFloor, direction); //id, floor
-                    this.FloorRequestsList.Add(i);
-                    buttonFloor++;
-                    ID++;
-                }
+            {
+                FloorRequestButton floorRequestButton = new FloorRequestButton(ID, buttonFloor, direction); //id, floor
+                this.FloorRequestsList.Add(i);
+                buttonFloor++;
+                ID++;
+            }
         }
 
         public void RequestFloor(int floor)
@@ -124,6 +118,11 @@ namespace RocketElevatorsCsharpController
         //}
 
         public static implicit operator List<object>(Elevator v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator Elevator(int v)
         {
             throw new NotImplementedException();
         }

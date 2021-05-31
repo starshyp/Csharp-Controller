@@ -14,6 +14,7 @@ namespace RocketElevatorsCsharpController
         public string Status { get; set; }
         public List<int> ServedFloors;
         //public List<int> ServedFloors { get; set; }
+        //List<int> ServedFloors = new List<int>;
         public bool IsBasement { get; set; }
         public List<Elevator> ElevatorsList;
         public List<CallButton> CallButtonsList;
@@ -28,9 +29,10 @@ namespace RocketElevatorsCsharpController
             //this.ServedFloors = _servedFloors;
             this.IsBasement = false;
             this.ElevatorsList = new List<Elevator>();
+
             for (int i = 0; i < _amountOfElevators; i++)
             {
-                Elevator elevator = new Elevator(i, _amountOfElevators);
+                Elevator elevator = new Elevator(i);
                 this.ElevatorsList.Add(elevator);
             }
 
@@ -176,12 +178,12 @@ namespace RocketElevatorsCsharpController
 
         //method to add to ElevatorsList
         public void CreateElevators(int _amountOfFloors, int _amountOfElevators)
-        {   
-            for (int i = 0; i < _amountOfElevators; i++)
+        {
+            
+            for (int i = 1; i <= _amountOfElevators; i++)
             {
-                Elevator elevator = new Elevator(elevatorID, _amountOfFloors); //id, amountOfFloors
+                Elevator elevator = new Elevator(i); //id, amountOfFloors
                 this.ElevatorsList.Add(elevator);
-                elevatorID++;
             }
         }
 
@@ -207,23 +209,25 @@ namespace RocketElevatorsCsharpController
         //****************MAIN****************
 
         //method to find best elevator
-        private Elevator FindBestElevator(int _requestedFloor, string _direction)
+        public Elevator FindBestElevator(int _requestedFloor, string _direction)
         {
             Elevator chosenElevator = null;
+            int score = 0;
             if (_requestedFloor == 1)
             {
                 ElevatorsList.ForEach(elevator =>
                 {
-                    //Elevator elevator1 = new Elevator(ID);
-                    //Elevator.ID = ID;
-                    //ElevatorsList.Add(elevator);
+                    if (elevator.CurrentFloor == 1 && elevator.Status == "down")
+                    {
+                        chosenElevator = elevator; score = 10;
+                    }
                     if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
                     {
-                        chosenElevator = elevator;
+                        chosenElevator = elevator; score = 8;
                     }
                     if (elevator.CurrentFloor == 1 && elevator.Status == "idle")
                     {
-                        chosenElevator = elevator;
+                        chosenElevator = elevator; score = 6;
                     }
                     else if (_requestedFloor != 1)
                     {
@@ -233,6 +237,24 @@ namespace RocketElevatorsCsharpController
             }
             return chosenElevator;
         }
+
+        //public Elevator FindNearest(int _requestedFloor, string direction)
+        //{
+        //    var selectedElevator;
+        //    int elevatorGap = 9000;
+        //    for (int i = 0; i < ElevatorsList.Count; i++)
+        //    {
+        //        if (this.ElevatorsList[i].)
+        //        {
+        //            var floorGap = Math.Abs(this.ElevatorsList);
+        //            if (floorGap > elevatorGap)
+        //            {
+        //                floorGap = elevatorGap;
+        //                selectedElevator = this.ElevatorsList[i];
+        //            }
+        //        }
+        //    }
+        //}
 
         //method to score elevator
         //checkIfElevatorIsBetter(scoreToCheck, newElevator, bestElevatorInformations, floor)

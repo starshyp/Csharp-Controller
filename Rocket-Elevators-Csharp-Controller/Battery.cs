@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace RocketElevatorsCsharpController
 {
     public class Battery
@@ -34,36 +35,33 @@ namespace RocketElevatorsCsharpController
                     flrb.FLRB_ID = FLRB_ID;
                     this.FloorRequestButtonsList.Add(flrb);
                 }
-          }
+        }
 
         //method to assign elevator
-        private (Column, Column) AssignElevator(int _requestedFloor, string _direction)
-            {
-                //Column column = new Column();
-                //Elevator elevator = new Elevator(_id);
-                Column bestColumn = FindBestColumn(_requestedFloor);
-                Column chosenElevator = FindBestElevator(_requestedFloor, _direction);
-                return (bestColumn, chosenElevator);
-                elevator.Go();
-            }
-
-        private Column FindBestElevator(int requestedFloor, string direction)
+        private Elevator AssignElevator(int _requestedFloor, string _direction)
         {
-            throw new NotImplementedException();
+            Column bestColumn = FindBestColumn(_requestedFloor);
+            Elevator chosenElevator = bestColumn.FindBestElevator(_requestedFloor, _direction);
+            return chosenElevator;
         }
+        
+        //private Column FindBestElevator(int requestedFloor, string direction)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //method to find best column
         private Column FindBestColumn(int _requestedFloor)
-            {
-                Column chosenColumn = null;
-                ColumnsList.ForEach(currentColumn => {
-                    if (currentColumn.ServedFloors[0] == _requestedFloor)
-                    {
-                        chosenColumn = currentColumn;
-                    }
-                });
-                return chosenColumn;
-            }
+        {
+            Column chosenColumn = null;
+            ColumnsList.ForEach(currentColumn => {
+                if (currentColumn.ServedFloors[0] == _requestedFloor)
+                {
+                    chosenColumn = currentColumn;
+                }
+            });
+            return chosenColumn;
+        }
     }
 }
 
