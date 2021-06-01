@@ -19,22 +19,23 @@ namespace RocketElevatorsCsharpController
             this.ID = _id;
             this.Status = "online";
             this.ColumnsList = new List<Column>();
-                int ID = 0;
-                for (int i = 0; i <= _amountOfColumns; ID++)
-                {
-                    Column column = new Column(ID, 5, 20, false);
-                    column.ID = ID;
-                    this.ColumnsList.Add(column);
-                }
             this.FloorRequestButtonsList = new List<FloorRequestButton>();
-            //FloorRequestButtonsList++;
-                int FLRB_ID = 0;
-                for (int i = 0; i < _amountOfFloors; ID++)
-                {
-                    FloorRequestButton flrb = new FloorRequestButton(FLRB_ID, 5, "down");
-                    flrb.FLRB_ID = FLRB_ID;
-                    this.FloorRequestButtonsList.Add(flrb);
-                }
+
+            char ID = 'A';
+            for (int i = 0; i <= _amountOfColumns; ID++)
+            {
+                Column column = new Column(ID, 66, 5, false);
+                column.ColID = ID;
+                this.ColumnsList.Add(column);
+            }
+                
+            int floorbID = 0;
+            for (int i = 0; i < _amountOfFloors; ID++)
+            {
+                FloorRequestButton floorb = new FloorRequestButton(floorbID, 5, "down");
+                floorb.FloorbID = ID;
+                this.FloorRequestButtonsList.Add(floorb);
+            }
         }
 
         //method to assign elevator
@@ -44,11 +45,6 @@ namespace RocketElevatorsCsharpController
             Elevator chosenElevator = bestColumn.FindBestElevator(_requestedFloor, _direction);
             return chosenElevator;
         }
-        
-        //private Column FindBestElevator(int requestedFloor, string direction)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         //method to find best column
         private Column FindBestColumn(int _requestedFloor)

@@ -6,19 +6,15 @@ namespace RocketElevatorsCsharpController
     public class FloorRequestButton
     {
         //auto-properties
-        public int FLRB_ID { get; set; }
+        public int FloorbID { get; set; }
         public string Status { get; set; }
         public int Floor { get; set; }
         public string Direction { get; set; }
 
-        //constructors
-        //public FloorRequestButton()
-        //{
-
-        //}
+        //constructor
         public FloorRequestButton(int _id, int _floor, string _direction)
         {
-            this.FLRB_ID = _id;
+            this.FloorbID = _id;
             this.Status = "online";
             this.Floor = _floor;
             this.Direction = _direction;

@@ -10,7 +10,7 @@ namespace RocketElevatorsCsharpController
         public string Status { get; set; }
         public int CurrentFloor { get; set; }
         public string Direction { get; set; }
-        public string Door { get; set; }
+        public int Door { get; set; }
         public List<int> FloorRequestsList { get; set; }
         public List<int> CompletedRequestsList { get; set; }
 
@@ -20,7 +20,7 @@ namespace RocketElevatorsCsharpController
             this.Status = "idle";
             this.CurrentFloor = 1;
             this.Direction = null;
-            this.Door = new Door(_id);
+            //this.Door = new Door(_id);
             this.FloorRequestsList = new List<int> { };
             this.CompletedRequestsList = new List<int> {};
         }
@@ -67,7 +67,7 @@ namespace RocketElevatorsCsharpController
                   while (this.CurrentFloor > destination)
                     {
                         this.CurrentFloor--;
-                }
+                    }
                 }
                 this.Status = "stopped";
                 //this.FloorRequestsList.Next();
@@ -117,14 +117,14 @@ namespace RocketElevatorsCsharpController
         //  }
         //}
 
-        public static implicit operator List<object>(Elevator v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator Elevator(int v)
-        {
-            throw new NotImplementedException();
-        }
+        // public static implicit operator List<object>(Elevator v)
+        // {
+        //     throw new NotImplementedException();
+        // }
+        //
+        // public static implicit operator Elevator(int v)
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 }

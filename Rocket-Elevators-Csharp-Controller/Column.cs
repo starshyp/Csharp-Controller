@@ -10,7 +10,7 @@ namespace RocketElevatorsCsharpController
         //private int GlobalMaxFloor;
 
         //auto-properties
-        public int ID { get; set; }
+        public char ColID { get; set; }
         public string Status { get; set; }
         public List<int> ServedFloors;
         //public List<int> ServedFloors { get; set; }
@@ -20,23 +20,23 @@ namespace RocketElevatorsCsharpController
         public List<CallButton> CallButtonsList;
 
 
-        //constructors
-        public Column(int _id, int _amountOfElevators, int _servedFloors, bool _isBasement)
+        //constructor
+        public Column(char _id, int _amountOfElevators, int _servedFloors, bool _isBasement)
         {
-            this.ID = _id;
+            this.ColID = _id;
             this.Status = "online";
             this.ServedFloors = new List<int>();
             //this.ServedFloors = _servedFloors;
             this.IsBasement = false;
             this.ElevatorsList = new List<Elevator>();
-
+            this.CallButtonsList = new List<CallButton>();
+            
             for (int i = 0; i < _amountOfElevators; i++)
             {
                 Elevator elevator = new Elevator(i);
                 this.ElevatorsList.Add(elevator);
             }
-
-            this.CallButtonsList = new List<CallButton>();
+            
             for (int j = 0; j <= _servedFloors; j++)
             {
                 //FloorRequestButton floorButton = j;
@@ -44,12 +44,12 @@ namespace RocketElevatorsCsharpController
                 {
                     CallButton button = new CallButton(j, j, "down");
                     this.CallButtonsList.Add(button);
-                    }
+                }
                 else if (j != _servedFloors)
                 {
                     CallButton button = new CallButton(j, j, "up");
                     this.CallButtonsList.Add(button);
-                    }
+                }
             }
         }
 
@@ -66,7 +66,7 @@ namespace RocketElevatorsCsharpController
         {
             for (var item = 0; item < _amountOfColumns; item++)
             {
-                if (this.ID == 0)
+                if (this.ColID == 'A')
                 {
                     for (int i = 0; i > -6; i--)
                     {
@@ -74,14 +74,14 @@ namespace RocketElevatorsCsharpController
                         Console.WriteLine(i);
                     }
                 }
-                else if (this.ID == 1)
+                else if (this.ColID == 'B')
                 {
                     for (int i = 2; i < 21; i++)
                     {
                         this.ServedFloors.Add(i);
                     }
                 }
-                else if (this.ID == 2)
+                else if (this.ColID == 'C')
                 {
                     this.ServedFloors.Add(1);
                     for (int i = 21; i < 41; i++)
@@ -89,7 +89,7 @@ namespace RocketElevatorsCsharpController
                         this.ServedFloors.Add(i);
                     }
                 }
-                else if (this.ID == 3)
+                else if (this.ColID == 'D')
                 {
                     this.ServedFloors.Add(1);
                     for (int i = 41; i < 61; i++)
@@ -158,22 +158,22 @@ namespace RocketElevatorsCsharpController
             int buttonFloor = 1;
             int callButtonID = 0;
             for (int i = 0; i < _amountOfFloors; i++)
-                {
-                    if (buttonFloor < _amountOfFloors)
-                    { //If it's not the last floor
+            {
+                if (buttonFloor < _amountOfFloors)
+                { //If it's not the last floor
                     CallButton callButton = new CallButton(callButtonID, buttonFloor, "up"); //id, floor, direction
                     this.CallButtonsList.Add(callButton);
-                        callButtonID++;
-                    }
+                    callButtonID++;
+                }
 
-                    if (buttonFloor > 1)
-                    { //If it's not the first floor
+                if (buttonFloor > 1)
+                { //If it's not the first floor
                     CallButton callButton = new CallButton(callButtonID, buttonFloor, "down"); //id, floor, direction
                     this.CallButtonsList.Add(callButton);
-                        callButtonID++;
-                    }
-                buttonFloor++;
+                    callButtonID++;
                 }
+                buttonFloor++;
+            }
         }
 
         //method to add to ElevatorsList
@@ -191,8 +191,7 @@ namespace RocketElevatorsCsharpController
         //****************MAIN****************
         public Elevator RequestElevator(int _requestedFloor, string _direction)
         {
-            //Elevator elevator = new Elevator(_id);
-            Elevator elevator = this.FindBestElevator(_requestedFloor);
+            Elevator elevator = this.FindBestElevator(_requestedFloor, _direction);
             elevator.FloorRequestsList.Add(_requestedFloor);
             //elevator.sortFloorList();
             elevator.Go();
@@ -201,33 +200,28 @@ namespace RocketElevatorsCsharpController
             return elevator;
         }
 
-        private Elevator FindBestElevator(int requestedFloor)
-        {
-            throw new NotImplementedException();
-        }
-
         //****************MAIN****************
 
         //method to find best elevator
         public Elevator FindBestElevator(int _requestedFloor, string _direction)
         {
             Elevator chosenElevator = null;
-            int score = 0;
+            // int score = 0;
             if (_requestedFloor == 1)
             {
                 ElevatorsList.ForEach(elevator =>
                 {
                     if (elevator.CurrentFloor == 1 && elevator.Status == "down")
                     {
-                        chosenElevator = elevator; score = 10;
+                        chosenElevator = elevator;
                     }
                     if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
                     {
-                        chosenElevator = elevator; score = 8;
+                        chosenElevator = elevator;
                     }
                     if (elevator.CurrentFloor == 1 && elevator.Status == "idle")
                     {
-                        chosenElevator = elevator; score = 6;
+                        chosenElevator = elevator;
                     }
                     else if (_requestedFloor != 1)
                     {

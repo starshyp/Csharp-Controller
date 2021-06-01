@@ -16,9 +16,9 @@ namespace RocketElevatorsCsharpController
             this.Status = "closed";
         }
 
-        public static implicit operator string(Door v)
-        {
-            throw new NotImplementedException();
-        }
+        //public static implicit operator string(Door v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

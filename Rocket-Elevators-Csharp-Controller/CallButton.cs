@@ -20,9 +20,9 @@ namespace RocketElevatorsCsharpController
             this.Direction = _direction;
         }
 
-        public static implicit operator List<object>(CallButton v)
-        {
-            throw new NotImplementedException();
-        }
+        //public static implicit operator List<object>(CallButton v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
