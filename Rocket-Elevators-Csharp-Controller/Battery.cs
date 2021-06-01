@@ -24,7 +24,7 @@ namespace RocketElevatorsCsharpController
             char ID = 'A';
             for (int i = 0; i <= _amountOfColumns; ID++)
             {
-                Column column = new Column(ID, 66, 5, false);
+                Column column = new Column(ID, 5, 20, true);
                 column.ColID = ID;
                 this.ColumnsList.Add(column);
             }
@@ -32,8 +32,8 @@ namespace RocketElevatorsCsharpController
             int floorbID = 0;
             for (int i = 0; i < _amountOfFloors; ID++)
             {
-                FloorRequestButton floorb = new FloorRequestButton(floorbID, 5, "down");
-                floorb.FloorbID = ID;
+                FloorRequestButton floorb = new FloorRequestButton(floorbID, floorbID, "down");
+                floorb.FloorbID = floorbID;
                 this.FloorRequestButtonsList.Add(floorb);
             }
         }
@@ -50,7 +50,8 @@ namespace RocketElevatorsCsharpController
         private Column FindBestColumn(int _requestedFloor)
         {
             Column chosenColumn = null;
-            ColumnsList.ForEach(currentColumn => {
+            ColumnsList.ForEach(currentColumn => 
+            {
                 if (currentColumn.ServedFloors[0] == _requestedFloor)
                 {
                     chosenColumn = currentColumn;

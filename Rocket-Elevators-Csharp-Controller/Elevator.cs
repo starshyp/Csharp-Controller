@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 namespace RocketElevatorsCsharpController
 {
@@ -10,7 +12,7 @@ namespace RocketElevatorsCsharpController
         public string Status { get; set; }
         public int CurrentFloor { get; set; }
         public string Direction { get; set; }
-        public int Door { get; set; }
+        public Door Door { get; set; }
         public List<int> FloorRequestsList { get; set; }
         public List<int> CompletedRequestsList { get; set; }
 
@@ -20,8 +22,8 @@ namespace RocketElevatorsCsharpController
             this.Status = "idle";
             this.CurrentFloor = 1;
             this.Direction = null;
-            //this.Door = new Door(_id);
-            this.FloorRequestsList = new List<int> { };
+            this.Door = new Door(_id);
+            this.FloorRequestsList = new List<int> {};
             this.CompletedRequestsList = new List<int> {};
         }
 
@@ -41,9 +43,19 @@ namespace RocketElevatorsCsharpController
         public void RequestFloor(int floor)
         {
             this.FloorRequestsList.Add(floor);
-            //this.SortFloorList();
+            // this.SortFloorList();
             this.Go();
-            //this.SwingDoors();
+            this.SwingDoors();
+        }
+
+        public Door SwingDoors()
+        {
+            if (CurrentFloor == this.FloorRequestsList[0])
+            {
+                this.Door.Status = "open";
+                Console.WriteLine("OPENING DOORS");
+            }
+            return this.SwingDoors();
         }
 
         public void Go()
@@ -75,56 +87,16 @@ namespace RocketElevatorsCsharpController
             this.Status = "idle";
         }
 
-        //public void SortFloorList()
-        //{
-        //    if (this.Direction == "up")
-        //    {
-        //        this.FloorRequestsList.Sort(var(a, b) { return a - b});
-        //    }
-        //    else
-        //    {
-        //        this.FloorRequestsList.Sort(var(a, b) { return b - a});
-
-        //    }
-        //}
-
-        //public void SwingDoors()
-        //{
-        //    this.doorStatus = "opened";
-        //    // WAIT 5 seconds
-        //if (!this.overweight)
-        //    {
-        //        this.door.status = "closing";
-        //    if (!this.door.obstruction)
-        //        {
-        //            this.door.status = "closed";
-        //    }
-        //        else
-        //        {
-        //            //Wait for the person to clear the way
-        //            this.door.obstruction = false
-        //          this.operateDoors()
-        //      }
-        //    }
-        //    else
-        //    {
-        //        while (this.overweight)
-        //        {
-        //            // Activate overweight alarm, and wait for someone to get out
-        //            this.overweight = false
-        //        }
-        //        this.operateDoors()
-        //  }
-        //}
-
-        // public static implicit operator List<object>(Elevator v)
+        // public void SortFloorList()
         // {
-        //     throw new NotImplementedException();
-        // }
-        //
-        // public static implicit operator Elevator(int v)
-        // {
-        //     throw new NotImplementedException();
+        //     if (this.Direction == "up")
+        //     {
+        //         this.FloorRequestsList.Sort(var(a, b) { return a - b});
+        //     }
+        //     else
+        //     {
+        //         this.FloorRequestsList.Sort(var(a, b) { return b - a});
+        //     }
         // }
     }
 }

@@ -5,11 +5,6 @@ namespace RocketElevatorsCsharpController
 {
     public class Column
     {
-        //fields
-        //private int GlobalMinFloor;
-        //private int GlobalMaxFloor;
-
-        //auto-properties
         public char ColID { get; set; }
         public string Status { get; set; }
         public List<int> ServedFloors;
@@ -53,25 +48,18 @@ namespace RocketElevatorsCsharpController
             }
         }
 
-        //public Column(int minFloor, int maxFloor)
-        //{
-        //    GlobalMinFloor = minFloor;
-        //    GlobalMaxFloor = maxFloor;
-        //}
-
         //method to add to ServedFloors
         //The floors are separated amongst the columns in the following way: B6 to B1, 2 to 20, 21 to 40, 41 to 60.
         //private List<int> ServedFloors = new List<int>();
         private void PushServedFloors(int _amountOfColumns)
         {
-            for (var item = 0; item < _amountOfColumns; item++)
+            for (var item = 'A'; item < _amountOfColumns; item++)
             {
                 if (this.ColID == 'A')
                 {
                     for (int i = 0; i > -6; i--)
                     {
                         this.ServedFloors.Add(i);
-                        Console.WriteLine(i);
                     }
                 }
                 else if (this.ColID == 'B')
@@ -83,7 +71,7 @@ namespace RocketElevatorsCsharpController
                 }
                 else if (this.ColID == 'C')
                 {
-                    this.ServedFloors.Add(1);
+                    // this.ServedFloors.Add(0);
                     for (int i = 21; i < 41; i++)
                     {
                         this.ServedFloors.Add(i);
@@ -91,7 +79,7 @@ namespace RocketElevatorsCsharpController
                 }
                 else if (this.ColID == 'D')
                 {
-                    this.ServedFloors.Add(1);
+                    // this.ServedFloors.Add(0);
                     for (int i = 41; i < 61; i++)
                     {
                         this.ServedFloors.Add(i);
@@ -102,57 +90,8 @@ namespace RocketElevatorsCsharpController
                     Console.WriteLine(i);
                 }
             }
-            //int floor;
-            //string column;
-
-            //floor = 1;
-            //switch (floor)
-            //{
-            //    case 01:
-            //    case 02:
-            //    case 03:
-            //    case 04:
-            //    case 05:
-            //    case 06:
-            //        column = colb;
-            //        break;
-
-            //    case > 1:
-            //    case <= 20:
-            //        column = col1;
-            //        break;
-
-            //    case 21:
-            //    case <= 40:
-            //        column = col2;
-            //        break;
-
-            //    case 41:
-            //    case <= 60:
-            //        column = col3;
-            //        break;
-
-            //    default:
-            //        column = lob;
-            //        break;
-
-            //List<int> numbers = new List<int>();
-            //public int 
-            //int[] array = new int[] { 1, 2, 3 };
-            //numbers.AddRange(array);
         }
-        //int first = firstColumn.Range(01, 06)
-        //int secondColumn.Range(2, 20);
-        //int thirdColumn.Range(21, 40);
-        //int fourthColumn.Range(41, 60);
 
-        //    for (int i = 0; i<columns; i++, ID++)
-        //    {
-        //        column.ID = ID;
-        //        ColumnsList.Add(column);
-        //    }
-
-        //method to add to CallButtonsList
         public void CreateCallButtons(int _amountOfFloors)
         {
             int buttonFloor = 1;
@@ -195,26 +134,29 @@ namespace RocketElevatorsCsharpController
             elevator.FloorRequestsList.Add(_requestedFloor);
             //elevator.sortFloorList();
             elevator.Go();
-            Console.WriteLine("<OPENING DOORS>");
-            //elevator.SwingDoors();
+            // Console.WriteLine("<OPENING DOORS>");
+            elevator.SwingDoors();
             return elevator;
         }
 
         //****************MAIN****************
 
         //method to find best elevator
+        
+        
         public Elevator FindBestElevator(int _requestedFloor, string _direction)
         {
             Elevator chosenElevator = null;
+            float floorCost = 10000;
             // int score = 0;
             if (_requestedFloor == 1)
             {
-                ElevatorsList.ForEach(elevator =>
+                this.ElevatorsList.ForEach(elevator =>
                 {
-                    if (elevator.CurrentFloor == 1 && elevator.Status == "down")
-                    {
-                        chosenElevator = elevator;
-                    }
+                    // if (elevator.CurrentFloor == 1 && elevator.Status == "down")
+                    // {
+                    //     chosenElevator = elevator;
+                    // }
                     if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
                     {
                         chosenElevator = elevator;
@@ -248,6 +190,12 @@ namespace RocketElevatorsCsharpController
         //            }
         //        }
         //    }
+        //}
+        
+        //public Column(int minFloor, int maxFloor)
+        //{
+        //    GlobalMinFloor = minFloor;
+        //    GlobalMaxFloor = maxFloor;
         //}
 
         //method to score elevator
