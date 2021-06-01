@@ -21,19 +21,38 @@ namespace RocketElevatorsCsharpController
             this.ColumnsList = new List<Column>();
             this.FloorRequestButtonsList = new List<FloorRequestButton>();
 
-            char ID = 'A';
-            for (int i = 0; i <= _amountOfColumns; ID++)
+            char[] colArr = { 'A', 'B', 'C', 'D'};
+            for (int i = 0; i < colArr.Length; i++)
             {
-                Column column = new Column(ID, 5, 20, true);
-                column.ColID = ID;
+                Column column = new Column(colArr[i], 5, 20, true);
+                column.ColID = colArr[i];
                 this.ColumnsList.Add(column);
+                Console.Write(colArr[i]);
             }
-                
-            int floorbID = 0;
-            for (int i = 0; i < _amountOfFloors; ID++)
+            Console.WriteLine("22222222TEST222222222");
+
+            //char ID = 'A';
+            //for (int i = 0; i < _amountOfColumns; i++, ID++)
+            //{
+            //    Column column = new Column(ID, 5, 20, true);
+            //    column.ColID = ID;
+            //    this.ColumnsList.Add(column);
+            //}
+
+            //for (int ID = 0; ID <= _amountOfColumns; ID++)
+            //{
+            //    Column column = new Column(ID, 5, 20, true);
+            //    column.ColID = ID;
+            //    this.ColumnsList.Add(column);
+            //}
+
+            // int floorbID = 0;
+            for (int i = -6; i <= _amountOfFloors; i++)
             {
-                FloorRequestButton floorb = new FloorRequestButton(floorbID, floorbID, "down");
-                floorb.FloorbID = floorbID;
+                int floor = -6;
+                FloorRequestButton floorb = new FloorRequestButton(i, floor, "down");
+                // floorb.FloorbID = i;
+                floor--;
                 this.FloorRequestButtonsList.Add(floorb);
             }
         }
@@ -47,7 +66,7 @@ namespace RocketElevatorsCsharpController
         }
 
         //method to find best column
-        private Column FindBestColumn(int _requestedFloor)
+        public Column FindBestColumn(int _requestedFloor)
         {
             Column chosenColumn = null;
             ColumnsList.ForEach(currentColumn => 

@@ -19,7 +19,7 @@ namespace RocketElevatorsCsharpController
         public Elevator(int _id)
         {
             this.ID = _id;
-            this.Status = "idle";
+            this.Status = "active";
             this.CurrentFloor = 1;
             this.Direction = null;
             this.Door = new Door(_id);
@@ -48,14 +48,16 @@ namespace RocketElevatorsCsharpController
             this.SwingDoors();
         }
 
-        public Door SwingDoors()
+        public void SwingDoors()
         {
-            if (CurrentFloor == this.FloorRequestsList[0])
-            {
-                this.Door.Status = "open";
-                Console.WriteLine("OPENING DOORS");
-            }
-            return this.SwingDoors();
+            this.Door.Status = "open";
+            Console.WriteLine("OPENING DOORS");
+            //if (CurrentFloor == this.FloorRequestsList[0])
+            //{
+            //    this.Door.Status = "open";
+            //    Console.WriteLine("OPENING DOORS");
+            //}
+            //return this.SwingDoors();
         }
 
         public void Go()
@@ -63,11 +65,11 @@ namespace RocketElevatorsCsharpController
             while (this.FloorRequestsList.Count != 0)
             {
                 int destination = this.FloorRequestsList[0];
-                this.Status = "moving";
+                this.Status = "active";
                 if (this.CurrentFloor < destination)
                 {
                     this.Direction = "up";
-                while (this.CurrentFloor < destination)
+                while (this.CurrentFloor <= destination)
                     {
                         Console.WriteLine("Elevator #" + this.ID + " is now at floor " + this.CurrentFloor);
                         this.CurrentFloor++;
@@ -82,7 +84,7 @@ namespace RocketElevatorsCsharpController
                     }
                 }
                 this.Status = "stopped";
-                //this.FloorRequestsList.Next();
+                this.FloorRequestsList.RemoveAt(0);
             }
             this.Status = "idle";
         }
