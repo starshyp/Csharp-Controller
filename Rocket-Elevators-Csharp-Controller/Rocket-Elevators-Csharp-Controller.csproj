@@ -39,6 +39,7 @@
     <Compile Include="FloorRequestButton.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="BestElevatorInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

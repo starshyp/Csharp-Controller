@@ -27,9 +27,8 @@ namespace RocketElevatorsCsharpController
                 Column column = new Column(colArr[i], 5, 20, true);
                 column.ColID = colArr[i];
                 this.ColumnsList.Add(column);
-                Console.Write(colArr[i]);
+                //Console.Write(colArr[i]);
             }
-            Console.WriteLine("22222222TEST222222222");
 
             //char ID = 'A';
             //for (int i = 0; i < _amountOfColumns; i++, ID++)

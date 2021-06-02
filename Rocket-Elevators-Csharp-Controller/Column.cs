@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+
 namespace RocketElevatorsCsharpController
 {
     public class Column
@@ -130,15 +132,16 @@ namespace RocketElevatorsCsharpController
         //****************MAIN****************
         public Elevator RequestElevator(int _requestedFloor, string _direction)
         {
-            //Console.WriteLine("TESTING");
-            //Console.WriteLine(_requestedFloor);
-            //Console.WriteLine(_direction);
+            Console.WriteLine("Floor Request Made on floor " + _requestedFloor);
+            Console.WriteLine("Column " + this.ColID + " chosen ");
+            Console.WriteLine("Processing...");
+            Console.WriteLine("Pshhhkkkkkkrrrr​kakingkakingkakingtsh​chchchchchchchcch");
+            //Thread.Sleep(1000);
             Elevator elevator = FindBestElevator(_requestedFloor, _direction);
+            Console.WriteLine("Best Elevator for the job: Elevator #" + elevator.ID);
             elevator.FloorRequestsList.Add(_requestedFloor);
-            Console.WriteLine("TEST MAIN");
             elevator.SwingDoors();
-            elevator.FloorRequestsList.ForEach(i => Console.WriteLine(i));
-            Console.WriteLine("TESTING TESTING");
+            //elevator.FloorRequestsList.ForEach(i => Console.WriteLine(i));
             //move to user
             elevator.Go();
 
@@ -161,44 +164,64 @@ namespace RocketElevatorsCsharpController
 
         public Elevator FindBestElevator(int _requestedFloor, string _direction)
         {
-            Elevator chosenElevator = null;
+            var chosenElevator = 1;
             var cost = 1000;
 
             this.ElevatorsList.ForEach(elevator =>
             {
-                if (_requestedFloor < elevator.CurrentFloor && elevator.Status == "idle" && _direction == "down")
+                if (_requestedFloor < elevator.CurrentFloor && elevator.Direction == "up" && _direction == elevator.Direction)
                 {
-                    for (var i = 0; i < this.ElevatorsList.Count; i++)
+                    for (var i = 1; i < this.ElevatorsList.Count; i++)
                     {
                         var distance = Math.Abs(this.ElevatorsList[i].CurrentFloor - _requestedFloor);
                         if (cost > distance)
                         {
                             cost = distance;
-                            chosenElevator = this.ElevatorsList[i];
-                            elevator.Status = "active";
+                            chosenElevator = i;
+                            //elevator.Status = "active";
                         }
                     }
                 }
-                else if (_requestedFloor > elevator.CurrentFloor && elevator.Status == "idle" && _direction == "up")
+                else if (_requestedFloor > elevator.CurrentFloor && elevator.Direction == "down" && _direction == elevator.Direction)
                 {
-                    for (var i = 0; i < this.ElevatorsList.Count; i++)
+                    for (var i = 1; i < this.ElevatorsList.Count; i++)
                     {
                         var distance = Math.Abs(this.ElevatorsList[i].CurrentFloor - _requestedFloor);
                         if (cost > distance)
                         {
                             cost = distance;
-                            chosenElevator = this.ElevatorsList[i];
-                            elevator.Status = "active";
+                            chosenElevator = i;
+                            //elevator.Status = "active";
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Failed");
+                    Console.WriteLine(_requestedFloor);
+                    Console.WriteLine(elevator.CurrentFloor);
+                    Console.WriteLine(elevator.Direction);
+                    Console.WriteLine(_direction);
                 }
             });
-            return chosenElevator;
+            return ElevatorsList[chosenElevator];
         }
+
+        //public Elevator FindBestElevator(int _requestedFloor, string _direction)
+        //{
+        //    var cost = 1000;
+        //    var chosenElevator = 0;
+
+        //    for (var i = 0; i < this.ElevatorsList.Count; i++)
+        //    {
+        //        var distance = ElevatorsList[i].CurrentFloor - _requestedFloor;
+        //        if (distance > 0 && distance < cost)
+        //        {
+        //            cost = distance;
+        //            chosenElevator = i;
+        //        }
+        //    }
+        //    return ElevatorsList[chosenElevator];
+        //}
 
         //public Elevator FindBestElevator(int _requestedFloor, string _direction)
         //{
@@ -252,89 +275,47 @@ namespace RocketElevatorsCsharpController
         //}
 
 
-            ///////////
-            ///
+        ///////////
+        ///
 
-            //foreach (var elevator in this.ElevatorsList)
-            //    if (elevator.Status == "idle")
-            //    {
-            //        return elevator;
-            //    }
+        //foreach (var elevator in this.ElevatorsList)
+        //    if (elevator.Status == "idle")
+        //    {
+        //        return elevator;
+        //    }
+        ///
+        ///////////
 
+        //return ElevatorsList[chosenElevator];
 
-            //        findElevator(requestedFloor, requestedDirection) {
-            //            let bestElevatorInformations = {
-            //        bestElevator: null,
-            //        bestScore: 5,
-            //        referenceGap: 1000000000
-            //    }
+        //if (_requestedFloor == 1)
+        //{
+        //    this.ElevatorsList.ForEach(elevator =>
+        //    {
+        //        // if (elevator.CurrentFloor == 1 && elevator.Status == "down")
+        //        // {
+        //        //     chosenElevator = elevator;
+        //        // }
+        //        if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
+        //        {
+        //            chosenElevator = elevator;
+        //        }
+        //        if (elevator.CurrentFloor == 1 && elevator.Status == "idle")
+        //        {
+        //            chosenElevator = elevator;
+        //        }
+        //        else if (_requestedFloor != 1)
+        //        {
+        //            chosenElevator = elevator;
+        //        }
+        //    });
+        //}
+        //else
+        //{
+        //    chosenElevator = this.ElevatorsList[0];
+        //}
+        //return chosenElevator;
 
-            //        this.elevatorsList.forEach(elevator => {
-            //            //The elevator is at my floor and going in the direction I want
-            //            if (requestedFloor == elevator.currentFloor && elevator.status == 'stopped' && requestedDirection == elevator.direction)
-            //            {
-            //                bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestElevatorInformations, requestedFloor)
-            //            }
-            //            //The elevator is lower than me, is coming up and I want to go up
-            //            else if (requestedFloor > elevator.currentFloor && elevator.direction == 'up' && requestedDirection == elevator.direction)
-            //            {
-            //                bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor)
-            //            }
-            //            //The elevator is higher than me, is coming down and I want to go down
-            //            else if (requestedFloor < elevator.currentFloor && elevator.direction == 'down' && requestedDirection == elevator.direction)
-            //            {
-            //                bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestElevatorInformations, requestedFloor)
-            //            }
-            //            //The elevator is idle
-            //            else if (elevator.status == 'idle')
-            //            {
-            //                bestElevatorInformations = this.checkIfElevatorIsBetter(3, elevator, bestElevatorInformations, requestedFloor)
-            //            }
-            //            //The elevator is not available, but still could take the call if nothing better is found
-            //            else
-            //            {
-            //                bestElevatorInformations = this.checkIfElevatorIsBetter(4, elevator, bestElevatorInformations, requestedFloor)
-            //            }
-            //        });
-            //        return bestElevatorInformations.bestElevator
-            //}
-
-
-
-
-            ///
-            ///////////
-
-            //return ElevatorsList[chosenElevator];
-
-            //if (_requestedFloor == 1)
-            //{
-            //    this.ElevatorsList.ForEach(elevator =>
-            //    {
-            //        // if (elevator.CurrentFloor == 1 && elevator.Status == "down")
-            //        // {
-            //        //     chosenElevator = elevator;
-            //        // }
-            //        if (elevator.CurrentFloor == 1 && elevator.Status == "stopped")
-            //        {
-            //            chosenElevator = elevator;
-            //        }
-            //        if (elevator.CurrentFloor == 1 && elevator.Status == "idle")
-            //        {
-            //            chosenElevator = elevator;
-            //        }
-            //        else if (_requestedFloor != 1)
-            //        {
-            //            chosenElevator = elevator;
-            //        }
-            //    });
-            //}
-            //else
-            //{
-            //    chosenElevator = this.ElevatorsList[0];
-            //}
-            //return chosenElevator;
-        
 
         //public Elevator FindNearest(int _requestedFloor, string direction)
         //{
@@ -360,27 +341,56 @@ namespace RocketElevatorsCsharpController
         //    GlobalMaxFloor = maxFloor;
         //}
 
-        //method to score elevator
-        //checkIfElevatorIsBetter(scoreToCheck, newElevator, bestElevatorInformations, floor)
+        //def bestElevator(self, _requestedFloor, _requestedDirection) -> None:
+        //bestElevatorInfo = {
+        //    "getElevator": "",
+        //    "score": 5,
+        //    "floorCost": 10000
+        ////}
+        //public Elevator FindBestElevator(int _requestedFloor, string _direction)
         //{
-        //    if (scoreToCheck < bestElevatorInformations.bestScore)
+        //    this.ElevatorsList.ForEach(elevator =>
         //    {
-        //        bestElevatorInformations.bestScore = scoreToCheck
-        //        bestElevatorInformations.bestElevator = newElevator
-        //        bestElevatorInformations.referenceGap = Math.abs(newElevator.currentFloor - floor)
-        //    }
-        //    else if (bestElevatorInformations.bestScore == scoreToCheck)
-        //    {
-        //        let gap = Math.abs(newElevator.currentFloor - floor)
-        //      if (bestElevatorInformations.referenceGap > gap)
+        //        if (_requestedFloor == elevator.CurrentFloor && elevator.Status == "stopped" && _direction == elevator.Direction)
         //        {
-        //            bestElevatorInformations.bestScore = scoreToCheck
-        //        bestElevatorInformations.bestElevator = newElevator
-        //        bestElevatorInformations.referenceGap = gap
-        //    }
-        //    }
-        //    return bestElevatorInformations
+
+        //        }
+        //    });
         //}
+
+
+        //    for elevator in self.elevatorsList:
+        //        if (_requestedFloor == elevator.currentFloor and elevator.status == 'stopped' and _requestedDirection == elevator.direction:
+        //            bestElevatorInfo = self.elevatorScore(1, elevator, bestElevatorInfo, _requestedFloor)
+
+        //        elif _requestedFloor > elevator.currentFloor and elevator.direction == 'up' and _requestedDirection == elevator.direction:
+        //            bestElevatorInfo = self.elevatorScore(2, elevator, bestElevatorInfo, _requestedFloor)
+
+        //        elif _requestedFloor<elevator.currentFloor and elevator.direction == 'down' and _requestedDirection == elevator.direction:
+        //            bestElevatorInfo = self.elevatorScore(2, elevator, bestElevatorInfo, _requestedFloor)
+
+        //        elif elevator.status == 'idle':
+        //            bestElevatorInfo = self.elevatorScore(3, elevator, bestElevatorInfo, _requestedFloor)
+
+        //        else:
+        //            bestElevatorInfo = self.elevatorScore(4, elevator, bestElevatorInfo, _requestedFloor)
+
+        //    return bestElevatorInfo["getElevator"]
+
+        //def elevatorScore(self, scoreCheck, newElevator, bestElevatorInfo, floor) -> None:
+        //    if scoreCheck<bestElevatorInfo["score"]:
+        //        bestElevatorInfo["score"] = scoreCheck
+        //        bestElevatorInfo["getElevator"] = newElevator
+        //        bestElevatorInfo["floorCost"] = abs(newElevator.currentFloor - floor)
+        //    elif bestElevatorInfo["score"] == scoreCheck:
+        //        gap = abs(newElevator.currentFloor - floor)
+        //        if bestElevatorInfo["floorCost"] > gap:
+        //            bestElevatorInfo["score"] = scoreCheck
+        //            bestElevatorInfo["getElevator"] = newElevator
+        //            bestElevatorInfo["floorCost"] = gap
+
+        //    return bestElevatorInfo
+
 
 
     }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
+
 namespace RocketElevatorsCsharpController
 {
     public class Elevator
@@ -51,13 +53,10 @@ namespace RocketElevatorsCsharpController
         public void SwingDoors()
         {
             this.Door.Status = "open";
-            Console.WriteLine("OPENING DOORS");
-            //if (CurrentFloor == this.FloorRequestsList[0])
-            //{
-            //    this.Door.Status = "open";
-            //    Console.WriteLine("OPENING DOORS");
-            //}
-            //return this.SwingDoors();
+            Console.WriteLine("<< Opening Doors >>");
+            Thread.Sleep(1000);
+            this.Door.Status = "closed";
+            Console.WriteLine(">> Closing Doors <<");
         }
 
         public void Go()
