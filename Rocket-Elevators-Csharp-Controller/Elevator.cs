@@ -68,7 +68,7 @@ namespace RocketElevatorsCsharpController
                 if (this.CurrentFloor < destination)
                 {
                     this.Direction = "up";
-                while (this.CurrentFloor <= destination)
+                    while (this.CurrentFloor < destination)
                     {
                         Console.WriteLine("Elevator #" + this.ID + " is now at floor " + this.CurrentFloor);
                         this.CurrentFloor++;
@@ -77,27 +77,38 @@ namespace RocketElevatorsCsharpController
                 else if (this.CurrentFloor > destination)
                 {
                     this.Direction = "down";
-                  while (this.CurrentFloor > destination)
+                    while (this.CurrentFloor > destination)
                     {
+                        Console.WriteLine("Elevator #" + this.ID + " is now at floor " + this.CurrentFloor);
                         this.CurrentFloor--;
                     }
                 }
                 this.Status = "stopped";
                 this.FloorRequestsList.RemoveAt(0);
+                Console.WriteLine("Elevator #" + this.ID + " is stopped on " + this.CurrentFloor);
+                this.SwingDoors();
             }
             this.Status = "idle";
         }
 
-        // public void SortFloorList()
-        // {
-        //     if (this.Direction == "up")
-        //     {
-        //         this.FloorRequestsList.Sort(var(a, b) { return a - b});
-        //     }
-        //     else
-        //     {
-        //         this.FloorRequestsList.Sort(var(a, b) { return b - a});
-        //     }
-        // }
+        //public void GoToLobby()
+        //{
+
+        //}
+
+        public void SortFloorList()
+        {
+            if (this.Direction == "up")
+            {
+                // this.FloorRequestsList.Sort(var(a, b) { return a - b});
+                this.FloorRequestsList.Sort();
+            }
+            else
+            {
+                // this.FloorRequestsList.Sort(var(a, b) { return b - a});
+                this.FloorRequestsList.Sort();
+                this.FloorRequestsList.Reverse();
+            }
+        }
     }
 }
