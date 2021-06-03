@@ -51,6 +51,8 @@ namespace RocketElevatorsCsharpController
                 }
             }
 
+            PushServedFloors(4);
+
             //for (int j = 0; j <= _servedFloors; j++)
             //{
             //    var buttonFloor = 1;
@@ -74,10 +76,11 @@ namespace RocketElevatorsCsharpController
         //method to add to ServedFloors
         //The floors are separated amongst the columns in the following way: B6 to B1, 2 to 20, 21 to 40, 41 to 60.
         //private List<int> ServedFloors = new List<int>();
-        private void PushServedFloors(int _amountOfColumns)
+
+        public void PushServedFloors(int _amountOfColumns)
         {
-            for (var item = 'A'; item < _amountOfColumns; item++)
-            {
+            //for (int j = 0; j < _amountOfColumns; j++)
+            //{
                 if (this.ColID == 'A')
                 {
                     for (int i = 0; i > -6; i--)
@@ -94,7 +97,6 @@ namespace RocketElevatorsCsharpController
                 }
                 else if (this.ColID == 'C')
                 {
-                    // this.ServedFloors.Add(0);
                     for (int i = 21; i < 41; i++)
                     {
                         this.ServedFloors.Add(i);
@@ -102,18 +104,58 @@ namespace RocketElevatorsCsharpController
                 }
                 else if (this.ColID == 'D')
                 {
-                    // this.ServedFloors.Add(0);
                     for (int i = 41; i < 61; i++)
                     {
                         this.ServedFloors.Add(i);
                     }
                 }
-                foreach (var i in ServedFloors)
+                else
                 {
-                    Console.WriteLine(i);
+                    Console.WriteLine("Fail");
                 }
-            }
+            //}
         }
+
+        //private void PushServedFloors(int _amountOfColumns)
+        //{
+        //    for (var item = 'A'; item < _amountOfColumns; item++)
+        //    {
+        //        if (this.ColID == 'A')
+        //        {
+        //            for (int i = 0; i > -6; i--)
+        //            {
+        //                this.ServedFloors.Add(i);
+        //            }
+        //        }
+        //        else if (this.ColID == 'B')
+        //        {
+        //            for (int i = 2; i < 21; i++)
+        //            {
+        //                this.ServedFloors.Add(i);
+        //            }
+        //        }
+        //        else if (this.ColID == 'C')
+        //        {
+        //            // this.ServedFloors.Add(0);
+        //            for (int i = 21; i < 41; i++)
+        //            {
+        //                this.ServedFloors.Add(i);
+        //            }
+        //        }
+        //        else if (this.ColID == 'D')
+        //        {
+        //            // this.ServedFloors.Add(0);
+        //            for (int i = 41; i < 61; i++)
+        //            {
+        //                this.ServedFloors.Add(i);
+        //            }
+        //        }
+        //        foreach (var i in ServedFloors)
+        //        {
+        //            Console.WriteLine(i);
+        //        }
+        //    }
+        //}
 
         //public void CreateCallButtons(int _amountOfFloors)
         //{

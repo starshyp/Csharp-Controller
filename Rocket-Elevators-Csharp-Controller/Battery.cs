@@ -46,12 +46,14 @@ namespace RocketElevatorsCsharpController
             //}
 
             // int floorbID = 0;
-            for (int i = -6; i <= _amountOfFloors; i++)
+            for (int i = 0; i <= _amountOfFloors; i++)
             {
                 int floor = -6;
-                FloorRequestButton floorb = new FloorRequestButton(i, floor, "down");
+                var floorRequestID = -6;
+                FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "up");
                 // floorb.FloorbID = i;
                 floor--;
+                floorRequestID--;
                 this.FloorRequestButtonsList.Add(floorb);
             }
         }

@@ -40,6 +40,7 @@ namespace RocketElevatorsCsharpController
             battery.ColumnsList[3].ElevatorsList[4].Status = "active";
             battery.ColumnsList[3].ElevatorsList[4].FloorRequestsList.Add(1);
 
+            //Column column = battery.FindBestColumn(54);
             Column column = battery.ColumnsList[3];
             Elevator elevator = column.RequestElevator(54, "down");
 
