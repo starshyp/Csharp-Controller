@@ -46,15 +46,61 @@ namespace RocketElevatorsCsharpController
             //}
 
             // int floorbID = 0;
-            for (int i = 0; i <= _amountOfFloors; i++)
+
+            void CreateFloorRequestButtons(int amountOfFloors)
             {
-                int floor = -6;
-                var floorRequestID = -6;
-                FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "up");
-                // floorb.FloorbID = i;
-                floor--;
-                floorRequestID--;
-                this.FloorRequestButtonsList.Add(floorb);
+                int floor = 0;
+                var floorRequestID = 0;
+
+                if (floor == 0)
+                {
+                    for (int i = 0; i < amountOfFloors; i++)
+                    {
+                        FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "up");
+                        this.FloorRequestButtonsList.Add(floorb);
+                        floor++;
+                        floorRequestID++;
+                    }
+                }
+                else if (floor < 0)
+                {
+                    for (int i = -6; i < amountOfFloors; i--)
+                    {
+                        FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "down");
+                        this.FloorRequestButtonsList.Add(floorb);
+                        floor--;
+                        floorRequestID--;
+                    }
+                }
+                
+                
+                // for (int i = 0; i <= _amountOfFloors; i++)
+                // {
+                //     if (floor < 0)
+                //     {
+                //         FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "up");
+                //         // floorb.FloorbID = i;
+                //         this.FloorRequestButtonsList.Add(floorb);
+                //         floor--;
+                //         floorRequestID--;
+                //     }
+                //     else if (floor > 0)
+                //     {
+                //         FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "down");
+                //         // floorb.FloorbID = i;
+                //         this.FloorRequestButtonsList.Add(floorb);
+                //         floor++;
+                //         floorRequestID++;
+                //     }
+                //     else if (floor < _amountOfFloors || floor > _amountOfFloors)
+                //     {
+                //         FloorRequestButton floorb = new FloorRequestButton(floorRequestID, floor, "up");
+                //         // floorb.FloorbID = i;
+                //         this.FloorRequestButtonsList.Add(floorb);
+                //         floor++;
+                //         floorRequestID++;
+                //     }
+                // }
             }
         }
 

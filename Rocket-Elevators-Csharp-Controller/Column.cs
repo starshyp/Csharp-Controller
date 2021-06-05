@@ -28,30 +28,61 @@ namespace RocketElevatorsCsharpController
             this.IsBasement = false;
             this.ElevatorsList = new List<Elevator>();
             this.CallButtonsList = new List<CallButton>();
+            
             for (int i = 0; i < _amountOfElevators; i++)
             {
                 //var ID = 1;
                 Elevator elevator = new Elevator(i);
-                this.ElevatorsList.Add(elevator);
+                this.ElevatorsList.Add(elevator); 
                 //ID++;
             }
 
-            for (int j = 0; j <= _servedFloors; j++)
+            void CreateCallButtons(int _amountOfFloors)
             {
-                //FloorRequestButton floorButton = j;
-                if (j != 1)
+                int callbtn = 0;
+                if (callbtn < 0)
                 {
-                    CallButton button = new CallButton(j, j, "down");
-                    this.CallButtonsList.Add(button);
+                    for (int j = -6; j <= _servedFloors; j--)
+                    {
+                        CallButton button = new CallButton(j, j, "up");
+                        this.CallButtonsList.Add(button);
+                    }
                 }
-                else if (j != _servedFloors)
+                else if (callbtn > 0)
                 {
-                    CallButton button = new CallButton(j, j, "up");
-                    this.CallButtonsList.Add(button);
+                    for (int j = 1; j <= _servedFloors; j++)
+                    {
+                        CallButton button = new CallButton(j, j, "down");
+                        this.CallButtonsList.Add(button);
+                    }
+                }
+                else if (callbtn < _servedFloors || callbtn > _servedFloors)
+                {
+                    for (int j = 0; j <= _servedFloors; j++)
+                    {
+                        CallButton button = new CallButton(j, j, "up");
+                        this.CallButtonsList.Add(button);
+                    }
                 }
             }
 
-            PushServedFloors(4);
+
+            // for (int j = -6; j <= _servedFloors; j++)
+            // {
+            //     //FloorRequestButton floorButton = j;
+            //     if (j != 1)
+            //     {
+            //         CallButton button = new CallButton(j, j, "down");
+            //         this.CallButtonsList.Add(button);
+            //     }
+            //     else if (j == 1 || j == -6 || j == -5 || j == -4 || j == -3 || j == -2 || j == -1)
+            //     {
+            //         CallButton button = new CallButton(j, j, "up");
+            //         this.CallButtonsList.Add(button);
+            //     }
+            // }
+
+            // PushServedFloors(4);
 
             //for (int j = 0; j <= _servedFloors; j++)
             //{
@@ -181,15 +212,15 @@ namespace RocketElevatorsCsharpController
         //}
 
         //method to add to ElevatorsList
-        public void CreateElevators(int _amountOfFloors, int _amountOfElevators)
-        {
-            
-            for (int i = 1; i <= _amountOfElevators; i++)
-            {
-                Elevator elevator = new Elevator(i); //id, amountOfFloors
-                this.ElevatorsList.Add(elevator);
-            }
-        }
+        // public void CreateElevators(int _amountOfFloors, int _amountOfElevators)
+        // {
+        //     
+        //     for (int i = 1; i <= _amountOfElevators; i++)
+        //     {
+        //         Elevator elevator = new Elevator(i); //id, amountOfFloors
+        //         this.ElevatorsList.Add(elevator);
+        //     }
+        // }
 
         //method to request elevator
         //****************MAIN****************
@@ -198,7 +229,6 @@ namespace RocketElevatorsCsharpController
             Console.WriteLine("Floor Request Made on floor " + _requestedFloor);
             Console.WriteLine("Column " + this.ColID + " chosen ");
             Console.WriteLine("Processing...");
-            Console.WriteLine("Pshhhkkkkkkrrrr​kakingkakingkakingtsh​chchchchchchchcch");
             Elevator elevator = this.FindBestElevator(_requestedFloor, _direction);
             Console.WriteLine("Best Elevator for the job: Elevator #" + elevator.ID);
             elevator.FloorRequestsList.Add(_requestedFloor);
@@ -234,8 +264,8 @@ namespace RocketElevatorsCsharpController
 
             Hashtable bestElevatorInfo = new Hashtable(){
                 {"chosenElevator", null},
-                {"score", 5},
-                {"distance", 100000000}
+                {"rank", 5},
+                {"distance", 1000}
             };
 
             this.ElevatorsList.ForEach(elevator =>
@@ -292,15 +322,15 @@ namespace RocketElevatorsCsharpController
                 }
             });
 
-            void isBestElevator(Elevator elevator, int elevatorScore)
+            void isBestElevator(Elevator elevator, int elevatorRank)
             {
-                if (elevatorScore < (int)bestElevatorInfo["score"])
+                if (elevatorRank < (int)bestElevatorInfo["rank"])
                 {
                     bestElevatorInfo["chosenElevator"] = elevator;
-                    bestElevatorInfo["score"] = elevatorScore;
+                    bestElevatorInfo["rank"] = elevatorRank;
                     bestElevatorInfo["distance"] = Math.Abs(elevator.CurrentFloor - _requestedFloor);
                 }
-                else if (elevatorScore == (int)bestElevatorInfo["score"])
+                else if (elevatorRank == (int)bestElevatorInfo["rank"])
                 {
                     var elevatorDistance = Math.Abs(elevator.CurrentFloor - _requestedFloor);
                     if (elevatorDistance < (int)bestElevatorInfo["distance"])

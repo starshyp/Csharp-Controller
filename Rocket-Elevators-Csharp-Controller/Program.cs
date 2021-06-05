@@ -9,40 +9,41 @@ namespace RocketElevatorsCsharpController
             //Console.WriteLine("Hello world");
 
             //scenario 3
-            
-            Console.WriteLine("=======================INITIATE=======================");
-            //Console.WriteLine(battery.ColumnsList);
-            //Console.WriteLine(battery.ColumnsList[4].ElevatorsList[0]);
-            Console.WriteLine("======================================================");
-            Battery battery = new Battery(1, 4, 60, 6, 5);
-            battery.ColumnsList[3].ElevatorsList[0].CurrentFloor = 58;
-            battery.ColumnsList[3].ElevatorsList[0].Direction = "down";
-            battery.ColumnsList[3].ElevatorsList[0].Status = "active";
-            battery.ColumnsList[3].ElevatorsList[0].FloorRequestsList.Add(1);
+            Column column = new Column('B',5,20,false);
+            column.PushServedFloors(4);
+            //Console.WriteLine("=======================INITIATE=======================");
+            ////Console.WriteLine(battery.ColumnsList);
+            ////Console.WriteLine(battery.ColumnsList[4].ElevatorsList[0]);
+            //Console.WriteLine("======================================================");
+            //Battery battery = new Battery(1, 4, 60, 6, 5);
+            //battery.ColumnsList[3].ElevatorsList[0].CurrentFloor = 58;
+            //battery.ColumnsList[3].ElevatorsList[0].Direction = "down";
+            //battery.ColumnsList[3].ElevatorsList[0].Status = "active";
+            //battery.ColumnsList[3].ElevatorsList[0].FloorRequestsList.Add(1);
 
-            battery.ColumnsList[3].ElevatorsList[1].CurrentFloor = 50;
-            battery.ColumnsList[3].ElevatorsList[1].Direction = "up";
-            battery.ColumnsList[3].ElevatorsList[1].Status = "active";
-            battery.ColumnsList[3].ElevatorsList[1].FloorRequestsList.Add(60);
+            //battery.ColumnsList[3].ElevatorsList[1].CurrentFloor = 50;
+            //battery.ColumnsList[3].ElevatorsList[1].Direction = "up";
+            //battery.ColumnsList[3].ElevatorsList[1].Status = "active";
+            //battery.ColumnsList[3].ElevatorsList[1].FloorRequestsList.Add(60);
 
-            battery.ColumnsList[3].ElevatorsList[2].CurrentFloor = 46;
-            battery.ColumnsList[3].ElevatorsList[2].Direction = "up";
-            battery.ColumnsList[3].ElevatorsList[2].Status = "active";
-            battery.ColumnsList[3].ElevatorsList[2].FloorRequestsList.Add(58);
+            //battery.ColumnsList[3].ElevatorsList[2].CurrentFloor = 46;
+            //battery.ColumnsList[3].ElevatorsList[2].Direction = "up";
+            //battery.ColumnsList[3].ElevatorsList[2].Status = "active";
+            //battery.ColumnsList[3].ElevatorsList[2].FloorRequestsList.Add(58);
 
-            battery.ColumnsList[3].ElevatorsList[3].CurrentFloor = 1;
-            battery.ColumnsList[3].ElevatorsList[3].Direction = "up";
-            battery.ColumnsList[3].ElevatorsList[3].Status = "active";
-            battery.ColumnsList[3].ElevatorsList[3].FloorRequestsList.Add(54);
+            //battery.ColumnsList[3].ElevatorsList[3].CurrentFloor = 1;
+            //battery.ColumnsList[3].ElevatorsList[3].Direction = "up";
+            //battery.ColumnsList[3].ElevatorsList[3].Status = "active";
+            //battery.ColumnsList[3].ElevatorsList[3].FloorRequestsList.Add(54);
 
-            battery.ColumnsList[3].ElevatorsList[4].CurrentFloor = 60;
-            battery.ColumnsList[3].ElevatorsList[4].Direction = "down";
-            battery.ColumnsList[3].ElevatorsList[4].Status = "active";
-            battery.ColumnsList[3].ElevatorsList[4].FloorRequestsList.Add(1);
+            //battery.ColumnsList[3].ElevatorsList[4].CurrentFloor = 60;
+            //battery.ColumnsList[3].ElevatorsList[4].Direction = "down";
+            //battery.ColumnsList[3].ElevatorsList[4].Status = "active";
+            //battery.ColumnsList[3].ElevatorsList[4].FloorRequestsList.Add(1);
 
-            //Column column = battery.FindBestColumn(54);
-            Column column = battery.ColumnsList[3];
-            Elevator elevator = column.RequestElevator(54, "down");
+            ////Column column = battery.FindBestColumn(54);
+            //Column column = battery.ColumnsList[3];
+            //Elevator elevator = column.RequestElevator(54, "down");
 
             //Column column = new Column('D', 5, 20, false);
             //column.RequestElevator(54, "down");

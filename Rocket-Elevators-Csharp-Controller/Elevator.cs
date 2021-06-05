@@ -29,18 +29,18 @@ namespace RocketElevatorsCsharpController
             this.CompletedRequestsList = new List<int> {};
         }
 
-        private void CreateFloorRequestButtons(int _amountOfFloors)
-        {
-            int buttonFloor = 1;
-            string direction = null;
-            for (int i = 0; i < _amountOfFloors; i++)
-            {
-                FloorRequestButton floorRequestButton = new FloorRequestButton(ID, buttonFloor, direction); //id, floor
-                this.FloorRequestsList.Add(i);
-                buttonFloor++;
-                ID++;
-            }
-        }
+        // private void PushToFloorRequestsList(int _amountOfFloors)
+        // {
+        //     int buttonFloor = 1;
+        //     string direction = null;
+        //     for (int i = 0; i < _amountOfFloors; i++)
+        //     {
+        //         FloorRequestButton floorRequestButton = new FloorRequestButton(ID, buttonFloor, direction); //id, floor
+        //         this.FloorRequestsList.Add(i);
+        //         buttonFloor++;
+        //         ID++;
+        //     }
+        // }
 
         public void RequestFloor(int floor)
         {
@@ -100,12 +100,10 @@ namespace RocketElevatorsCsharpController
         {
             if (this.Direction == "up")
             {
-                // this.FloorRequestsList.Sort(var(a, b) { return a - b});
                 this.FloorRequestsList.Sort();
             }
             else
             {
-                // this.FloorRequestsList.Sort(var(a, b) { return b - a});
                 this.FloorRequestsList.Sort();
                 this.FloorRequestsList.Reverse();
             }
